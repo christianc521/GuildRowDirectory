@@ -1,18 +1,19 @@
-import styles from "pages/list.module.css"
-import Accordion from "../components/Accordion";
-import ReactDOM from 'react-dom';
-import React, { useState } from "react";
+import List from "./List"
+import Search from "../components/Searchbar";
+import React, { useState } from 'react';
+import { store } from "../src/app/store";
+import { Provider } from 'react-redux'
+
 const {GoogleAuth} = require('google-auth-library');
 const {google} = require('googleapis');
 
-export async function getServerSideProps({query}) {
+
+export async function getServerSideProps() {
 
     const auth = new GoogleAuth({
         scopes: 'https://www.googleapis.com/auth/spreadsheets',
       });
     const sheets = google.sheets({ version: 'v4', auth});
-
-    const { id } = query
     const range = 'FormResponses1!A2:L300';
 
     const response = await sheets.spreadsheets.values.get({
@@ -60,48 +61,15 @@ export async function getServerSideProps({query}) {
     }
 }
 
-export default function List({ memberList }) {
-    console.log({memberList});
-    const [value, setValue] = useState('')
+export default function Home({memberList}) {
 
-    // allow search bar to be dynamically changed
-    const onChange = (e) => {
-      setValue(e.target.value);
-    }
-
-    // called search button click
-    const onSearch = (searchTerm) => {
-    // this is where list can be fetched 
-    // logs are printed in browser console
-    console.log("searching: ", searchTerm)
-  }
     return (
-        <div>
-          <h1>Guild Row Directory</h1>
-          <input type="text" name="searchBar" value={value} placeholder="Enter a member's name" onChange={onChange}/>
-          <button onClick={() => onSearch(value)}> Search it!</button>
-          <ul>
-            {memberList.map(function(member){
-                let memberInfoHTML = "<ul><li>" + member[2] + "</li> <li>e-mail: " + member[3] + "</li><li>Job Title: " + member[4] + "</li><li>Occupation: " + member[5] + "</li></ul>" 
-                if (member[1].toLowerCase().includes(value)) {
-                  return (
-                    <div style={styles}>
-                      <Accordion title={member[1]} content= {memberInfoHTML}/>
-                    </div>
-                  )
-                }
-                
-
-              })}
-          </ul>
-        </div>
-        
+        <Provider store={store}>
+            <div>
+                <h1>Guild Row Directory</h1>
+                <Search />
+                <List {...{memberList}} />
+            </div>
+        </Provider>
     )
 }
-
-
-// export default function Post() {
-//   return (
-//     <List />
-//   )
-// }
