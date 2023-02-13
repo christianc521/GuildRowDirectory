@@ -1,5 +1,10 @@
+.h2 {
+  color: white;
+  font-size: 20px;
+}
+
 .collapsible {
-    background-color: #777;
+    background-color: #404141;
     color: white;
     cursor: pointer;
     padding: 18px;
@@ -27,6 +32,7 @@
   }
   
   .content {
+    font-size: 18px;
     padding: 0 18px;
     max-height: 0;
     overflow: hidden;

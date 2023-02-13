@@ -1,0 +1,11 @@
+.input {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    font-size: 20px;
+    height: 60px;
+    padding-left: 50px;
+    background-image: url(../assets/searchbarIcon.svg);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}

@@ -1,3 +1,4 @@
+import styles from "./home.module.css"
 import List from "./List"
 import Search from "../components/Searchbar";
 import React, { useState } from 'react';
@@ -65,11 +66,15 @@ export default function Home({memberList}) {
 
     return (
         <Provider store={store}>
-            <div>
-                <h1>Guild Row Directory</h1>
-                <Search />
-                <List {...{memberList}} />
-            </div>
+            <body className={styles.body}>
+                <div className={styles.top}>
+                    <h1 className={styles.title}>Guild Row Directory</h1>
+                    <Search />
+                </div>
+                <div>
+                    <List {...{memberList}} />
+                </div>
+            </body>
         </Provider>
     )
 }

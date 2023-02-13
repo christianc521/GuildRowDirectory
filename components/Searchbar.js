@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { updateInput } from './SearchSlice'
+import styles from "./search.module.css"
 
 export default function Search() {
     const searchInput = useSelector((state) => state.searchInput.value)
@@ -12,6 +13,6 @@ export default function Search() {
         }
     }
     return (
-        <input onKeyDown={handleKeyDown} />
+        <input className={styles.input} placeholder="search by name..." onKeyDown={handleKeyDown} />
     )
 }
