@@ -5,7 +5,8 @@
     font-size: 20px;
     height: 60px;
     padding-left: 50px;
-    background-image: url(../assets/searchbarIcon.svg);
+    background-image: url(/assets/searchbarIcon.svg);
     background-repeat: no-repeat;
     background-position: 10px center;
+    border-radius: 10px;
 }

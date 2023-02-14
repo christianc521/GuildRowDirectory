@@ -1,9 +1,10 @@
 import styles from "./home.module.css"
 import List from "./List"
 import Search from "../components/Searchbar";
-import React, { useState } from 'react';
+import React, { useState , Image} from 'react';
 import { store } from "../src/app/store";
 import { Provider } from 'react-redux'
+import guildRowLogo from "../public/assets/grIcon.png"
 
 const {GoogleAuth} = require('google-auth-library');
 const {google} = require('googleapis');
@@ -67,10 +68,11 @@ export default function Home({memberList}) {
     return (
         <Provider store={store}>
             <body className={styles.body}>
-                <div className={styles.top}>
-                    <h1 className={styles.title}>Guild Row Directory</h1>
+                <header className={styles.top}>
+                    {/* <h1 className={styles.title}>Guild Row Directory</h1> */}
+                    <img src="images/grIcon.png" width="60" height="60"/>
                     <Search />
-                </div>
+                </header>
                 <div>
                     <List {...{memberList}} />
                 </div>
