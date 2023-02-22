@@ -1,0 +1,12 @@
+.filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.filterHeading {
+    padding-top: 10%;
+    font-size: 18px;
+    color: white;
+}

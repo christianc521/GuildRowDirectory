@@ -12,6 +12,16 @@
 }
 
 .ul {
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 20px;
+  width: 80%;
+}
+
+.content {
+  padding-left: 6px;
+  list-style: none;
+  width: 100%
+}
+
+.list {
+  margin-top: 4%;
 }
