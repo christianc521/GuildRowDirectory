@@ -9,6 +9,7 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { useSelector } from "react-redux";
 
+
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} {...props} />
 ))(({ theme }) => ({
@@ -48,14 +49,15 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 
-export default function List({ memberList }) {
+export default function List() {
     const input = useSelector((state) => state.searchInput.value)
     const filter = useSelector((state) => state.filterInput.value)
+    const members = useSelector((state) => state.memberInput.value)
+    console.log("list members", members)
     return (
         <div className={styles.list}>
           <ul className={styles.ul}>
-            {memberList.map(function(member){
-                let memberInfoHTML = "<ul><li>" + member[2] + "</li> <li>e-mail: " + member[3] + "</li><li>Job Title: " + member[4] + "</li><li>Occupation: " + member[5] + "</li></ul>" 
+            {/* {members.map(function(member){
                 if ((member[1].toLowerCase().includes(input.toLowerCase())) || (member[9].toLowerCase().includes(filter.toLowerCase()))) {
                   return (
                       <Accordion>
@@ -88,7 +90,7 @@ export default function List({ memberList }) {
                     
                   )
                 }
-              })}
+              })} */}
           </ul>
         </div>
         
