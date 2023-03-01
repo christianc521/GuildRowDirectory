@@ -83,6 +83,7 @@ export default function Home({memberList}) {
                       <div className={styles.mainLeft}>
                         <MultipleSelectPlaceholder />
                       </div>
+                      <hr className={styles.divider}></hr>
                       <div className={styles.mainRight}>
                       <List {...{memberList}} />
                       </div>

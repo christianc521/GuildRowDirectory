@@ -19,9 +19,15 @@
 .content {
   padding-left: 6px;
   list-style: none;
-  width: 100%
+  width: 100%;
 }
 
 .list {
   margin-top: 4%;
+  height: 7%;
+  overflow-y: scroll;
 }
+/* 
+.list::-webkit-scrollbar {
+  display: none;
+} */
