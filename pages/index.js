@@ -16,6 +16,11 @@ const inter = Inter({ subsets: ['latin'] })
 export async function getStaticProps() {
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
+    credentials: {
+      client_email: process.env.NEXT_PUBLIC_CLIENT_EMAIL,
+      private_key: process.env.NEXT_PUBLIC_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    },
+    projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
   });
   const sheets = google.sheets({ version: 'v4', auth });
   const range = 'FormResponses1!A2:L300';
