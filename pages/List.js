@@ -54,11 +54,11 @@ export default function List({ memberList }) {
     return (
         <div className={styles.list}>
           <ul className={styles.ul}>
-            {memberList.map(function(member){
+            {memberList.map(function(member, index){
                 let memberInfoHTML = "<ul><li>" + member[2] + "</li> <li>e-mail: " + member[3] + "</li><li>Job Title: " + member[4] + "</li><li>Occupation: " + member[5] + "</li></ul>" 
                 if ((member[1].toLowerCase().includes(input.toLowerCase())) && (member[9].toLowerCase().includes(filter.toLowerCase()))) {
                   return (
-                      <Accordion>
+                      <Accordion key={index}>
                         <AccordionSummary>
                         <Typography sx={{ color: '#EFEFEF',width: '24%', flexShrink: 0, fontWeight: 'bold', paddingLeft: '10px' }}>
                           {member[1]}
