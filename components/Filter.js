@@ -2,10 +2,12 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import styles from './filter.module.css';
 import { updateFilter } from './FilterSlice'
+import { updateInput } from './SearchSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { brotliDecompress } from 'zlib';
 
@@ -58,6 +60,7 @@ export default function MultipleSelectPlaceholder() {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
   const filterInput = useSelector((state) => state.filterInput.value)
+  const searchInput = useSelector((state) => state.searchInput.value)
   const dispatch = useDispatch()
 
   const handleChange = (event) => {
@@ -80,10 +83,13 @@ export default function MultipleSelectPlaceholder() {
           displayEmpty
           value={personName}
           onChange={handleChange}
-          input={<OutlinedInput />}
+          input={<OutlinedInput 
+            className={styles.dropdownBox}
+            classes={{ notchedOutline: styles.whiteInputLabel }}
+           />}
           renderValue={(selected) => {
             if (selected.length === 0) {
-              return <em>I want to learn...</em>;
+              return <em >I want to learn...</em>;
             }
 
             return selected.join(', ');
@@ -92,7 +98,7 @@ export default function MultipleSelectPlaceholder() {
           inputProps={{ 'aria-label': 'Without label' }}
         >
           <MenuItem disabled value="">
-            <em>Scroll through list</em>
+            <em >Scroll through list</em>
           </MenuItem>
           {names.map((name) => (
             <MenuItem
@@ -105,6 +111,12 @@ export default function MultipleSelectPlaceholder() {
           ))}
         </Select>
       </FormControl>
+      <Button variant="contained" color="error" onClick={() => {
+            dispatch(updateFilter(""))
+            dispatch(updateInput(""))
+        }}>
+        Clear Filters
+      </Button>
     </div>
   );
 }

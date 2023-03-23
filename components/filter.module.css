@@ -10,3 +10,22 @@
     font-size: 18px;
     color: white;
 }
+
+.whiteOutline {
+    color: #f9f9f9;
+    border-color: #f9f9f9 !important;
+}
+  
+.whiteText {
+    color: #f9f9f9;
+}
+
+.whiteInputLabel {
+    color: #f9f9f9;
+    border-color: #f9f9f9 !important;
+}
+
+.dropdownBox {
+    background-color: #f9f9f9;
+    border-color: white !important;
+  }

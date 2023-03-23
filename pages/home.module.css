@@ -1,9 +1,16 @@
+.html {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 .body {
     background-color: #3D3B44;
-    margin: 0%;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
     height: 50%;
     overflow: hidden;
-
 }
 
 .title {
@@ -64,4 +71,9 @@
 .divider {
     margin-left: 5%;
     height: 800px;
+}
+
+.resultsHeader {
+    color: #f9f9f9;
+    padding-top: 10px;
 }

@@ -1,0 +1,15 @@
+/* Reset margins, padding, and borders */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Set the height of the body and html elements to fill the viewport */
+html,
+body,
+#__next {
+  height: 100%;
+  width: 100%;
+}

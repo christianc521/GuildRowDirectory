@@ -2,7 +2,7 @@ import styles from "./home.module.css"
 import List from "./List"
 import Search from "../components/Searchbar";
 import MultipleSelectPlaceholder from "../components/Filter";
-import React, { useState , Image} from 'react';
+import React, { useState, useEffect , Image} from 'react';
 import { store } from "../src/app/store";
 import { Provider } from 'react-redux'
 import guildRowLogo from "../public/assets/grIcon.png"
@@ -13,69 +13,55 @@ const {GoogleAuth} = require('google-auth-library');
 const {google} = require('googleapis');
 const inter = Inter({ subsets: ['latin'] })
 
+export async function getStaticProps() {
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/spreadsheets',
+  });
+  const sheets = google.sheets({ version: 'v4', auth });
+  const range = 'FormResponses1!A2:L300';
 
-export async function getServerSideProps() {
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.SHEET_ID,
+    range,
+  });
 
-    const auth = new GoogleAuth({
-        scopes: 'https://www.googleapis.com/auth/spreadsheets',
-      });
-    const sheets = google.sheets({ version: 'v4', auth});
-    const range = 'FormResponses1!A2:L300';
+  const numRows = response.data.values ? response.data.values.length : 0;
+  console.log(`${numRows} rows retrieved.`);
 
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.SHEET_ID,
-      range,
-    });
+  const memberList = []; //storing all members in a single array
 
-    const numRows = response.data.values ? response.data.values.length : 0;
-    console.log(`${numRows} rows retrieved.`);
-    
-    const memberList = []; //storing all members in a single array
-    let memberInfo = {
-      timestamp: "",
-      fullName: "",
-      pronouns: "",
-      email: "",
-      jobTitle: "",
-      occupation: "",
-      otherOccupation: "",
-      interests: "",
-      otherInterests: "",
-      skills: "",
-      otherSkills: "",
-      consent: ""
+  for (let i = 0; i < numRows; i++) {
+    const memberInfo = response.data.values[i];
+
+    if (memberInfo[11] == 'No') {
+      continue;
     }
 
-    const [timestamp, fullName] = response.data.values[numRows - 1];
-    for (let i = 0; i < numRows; i++) {
-     
-      memberInfo = response.data.values[i];
-
-      if (memberInfo[11] == "No") {
-        continue;
-      }
-
-      if (memberInfo[6] != "") {
-        memberInfo[5] = memberInfo[6];
-      }
-      memberList.push(memberInfo);
+    if (memberInfo[6] != '') {
+      memberInfo[5] = memberInfo[6];
     }
-    return {
-        props: {
-            memberList
-        }
-    }
+    memberList.push(memberInfo);
+  }
+  return {
+    props: {
+      memberList: JSON.parse(JSON.stringify(memberList)),
+    },
+    revalidate: 60, // Regenerate the static page every 60 seconds
+  };
 }
 
 export default function Home({memberList}) {
+    const [clientMemberList, setClientMemberList] = useState([]);
+
+    console.log('Server-rendered data:', memberList);
+    console.log('Client-rendered data:', clientMemberList);
 
     return (
       <>
       <main className={inter.className}>
         <Provider store={store}>
-              <body className={styles.body}>
+              <div className={styles.body}>
                   <header className={styles.top}>
-                      {/* <h1 className={styles.title}>Guild Row Directory</h1> */}
                       <img className={styles.topElements} src="static/Gold_LogoBug.png" width="100" height="100"/>
                       <Search />
                   </header>
@@ -85,13 +71,21 @@ export default function Home({memberList}) {
                       </div>
                       <hr className={styles.divider}></hr>
                       <div className={styles.mainRight}>
+                      <h1 className={styles.resultsHeader}>Results</h1>
                       <List {...{memberList}} />
                       </div>
-                      
                   </div>
-              </body>
+              </div>
           </Provider>
       </main>
       </>
+      // <div>
+      // <h1>Member List</h1>
+      // <ul>
+      //   {memberList.map((member, index) => (
+      //     <li key={index}>{member[1]}</li>
+      //   ))}
+      // </ul>
+      // </div>
     )
 }

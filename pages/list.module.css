@@ -12,7 +12,7 @@
 }
 
 .ul {
-  padding-left: 20px;
+  padding-left: 0px;
   width: 80%;
 }
 
@@ -23,10 +23,11 @@
 }
 
 .list {
-  margin-top: 4%;
-  height: 7%;
+  /* margin-top: 4%; */
+  height: 700px;
   overflow-y: scroll;
 }
+
 /* 
 .list::-webkit-scrollbar {
   display: none;

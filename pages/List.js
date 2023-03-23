@@ -56,7 +56,7 @@ export default function List({ memberList }) {
           <ul className={styles.ul}>
             {memberList.map(function(member){
                 let memberInfoHTML = "<ul><li>" + member[2] + "</li> <li>e-mail: " + member[3] + "</li><li>Job Title: " + member[4] + "</li><li>Occupation: " + member[5] + "</li></ul>" 
-                if ((member[1].toLowerCase().includes(input.toLowerCase())) || (member[9].toLowerCase().includes(filter.toLowerCase()))) {
+                if ((member[1].toLowerCase().includes(input.toLowerCase())) && (member[9].toLowerCase().includes(filter.toLowerCase()))) {
                   return (
                       <Accordion>
                         <AccordionSummary>
