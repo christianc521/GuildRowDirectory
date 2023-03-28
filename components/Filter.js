@@ -197,8 +197,8 @@ export default function MultipleSelectPlaceholder() {
         </div>
       </div>
       <MyButton variant="contained" color="#c4a57" onClick={() => {
-            dispatch(updateFilter1({ personName1: '' }));
-            dispatch(updateFilter2({ personName2: '' }));
+            dispatch(updateFilter({ personName1: '' }));
+            dispatch(updateFilter({ personName2: '' }));
             dispatch(updateInput(''));
         }} className={styles.clearFiltersButton} >
         Clear Filters
