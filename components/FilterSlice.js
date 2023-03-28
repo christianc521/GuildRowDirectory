@@ -20,6 +20,6 @@ export const filterSlice = createSlice({
       },
 })
 
-export const { updateFilter, updateSecondFilter} = filterSlice.actions
+export const { updateFilter } = filterSlice.actions
 
 export default filterSlice.reducer

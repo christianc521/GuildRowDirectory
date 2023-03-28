@@ -7,7 +7,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import styles from './filter.module.css';
 import { updateFilter } from './FilterSlice'
-import { updateSecondFilter } from './FilterSlice';
 import { updateInput } from './SearchSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -116,7 +115,7 @@ export default function MultipleSelectPlaceholder() {
     setPersonName2(typeof value === 'string' ? value.split(',') : value);
     dispatch(updateInput(''))
     dispatch(updateFilter({ personName1: '' }));
-    dispatch(updateFilter({ personName2: value }));
+    dispatch(updateFilter({ personName1: value }));
     setPersonName1([]);
   };
   
@@ -198,8 +197,8 @@ export default function MultipleSelectPlaceholder() {
         </div>
       </div>
       <MyButton variant="contained" color="#c4a57" onClick={() => {
-            dispatch(updateFilter({ personName1: '' }));
-            dispatch(updateFilter({ personName2: '' }));
+            dispatch(updateFilter1({ personName1: '' }));
+            dispatch(updateFilter2({ personName2: '' }));
             dispatch(updateInput(''));
         }} className={styles.clearFiltersButton} >
         Clear Filters
