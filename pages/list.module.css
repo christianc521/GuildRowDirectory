@@ -28,6 +28,24 @@
   overflow-y: scroll;
 }
 
+.emptySearch {
+  color: #EFEFEF;
+}
+
+.pronouns {
+  font-style: italic;
+}
+
+.category {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-top: 5px;
+}
+
+.email {
+  font-size: 14px;
+  margin-top: 5px;
+}
 /* 
 .list::-webkit-scrollbar {
   display: none;

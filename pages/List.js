@@ -1,6 +1,6 @@
 import styles from "pages/list.module.css"
 // import Accordion from "../components/Accordion";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
@@ -51,46 +51,77 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export default function List({ memberList }) {
     const input = useSelector((state) => state.searchInput.value)
     const filter = useSelector((state) => state.filterInput.value)
+
+
+    const filteredMembers = memberList.filter((member) => {
+      const nameMatch =
+        input === 'initialkey12345' ||
+        member[1].toLowerCase().includes(input.toLowerCase());
+      const filterMatch =  (member[1].toLowerCase().includes(input.toLowerCase()) &&
+                            member[9].toLowerCase().includes(filter.personName1.toLowerCase()) &&
+                            member[7].toLowerCase().includes(filter.personName2.toLowerCase()));
+
+      return nameMatch && filterMatch;
+      
+    });
+
     return (
         <div className={styles.list}>
           <ul className={styles.ul}>
-            {memberList && memberList.map(function(member, index){
-                let memberInfoHTML = "<ul><li>" + member[2] + "</li> <li>e-mail: " + member[3] + "</li><li>Job Title: " + member[4] + "</li><li>Occupation: " + member[5] + "</li></ul>" 
-                if ((member[1].toLowerCase().includes(input.toLowerCase())) && (member[9].toLowerCase().includes(filter.toLowerCase()))) {
-                  return (
-                      <Accordion key={index}>
-                        <AccordionSummary>
-                        <Typography sx={{ color: '#EFEFEF',width: '24%', flexShrink: 0, fontWeight: 'bold', paddingLeft: '10px' }}>
-                          {member[1]}
-                        </Typography>
-                          <Typography sx={{ color: '#7C7C7C' }}>{member[4]}</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails className={styles.accordionDetails}>
-                          <ul className={styles.content}>
-                            <li>
-                              {member[2]}
-                            </li>
-                            <li>
-                              Occupation: {member[5]}
-                            </li>
-                            <li>
-                              Interests: {member[7]}
-                            </li>
-                            <li>
-                              Skills I want to share: {member[9]}
-                            </li>
-                            <li>
-                              {member[3]}
-                            </li>
-                          </ul>
-                        </AccordionDetails>
-                      </Accordion>
-                    
-                  )
+            {memberList && memberList.map(function (member, index) {
+              const nameMatch = member[1].toLowerCase().includes(input.toLowerCase());
+              const filterMatch = ((member[1].toLowerCase().includes(input.toLowerCase())) &&
+                                  member[9].toLowerCase().includes(filter.personName1.toLowerCase()) &&
+                                  member[7].toLowerCase().includes(filter.personName2.toLowerCase()));
+  
+              if (input === "initialkey12345") {
+                if (filterMatch) {
+                  return renderMember(member, index, styles);
                 }
-              })}
+              }
+              else if (nameMatch && filterMatch) {
+                  return renderMember(member, index, styles);
+              }
+            })}
           </ul>
+          {memberList.length > 0 && filteredMembers.length === 0 && (
+            <p className={styles.emptySearch}>No members found, start a new search!</p>
+          )}
         </div>
-        
     )
+}
+
+function renderMember(member, index, styles) {
+  return (
+    <Accordion key={index}>
+                      <AccordionSummary>
+                      <Typography sx={{ color: '#EFEFEF',width: '24%', flexShrink: 0, fontWeight: 'bold', paddingLeft: '10px' }}>
+                        {member[1]}
+                      </Typography>
+                        <Typography sx={{ color: '#7C7C7C' }}>{member[4]}</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails className={styles.accordionDetails}>
+                        <ul className={styles.content}>
+                          <li className={styles.pronouns}>
+                            {member[2]}
+                          </li>
+                          <li className={styles.category}>
+                            Interests
+                          </li>
+                          <li>
+                            {member[7]}
+                          </li>
+                          <li className={styles.category}>
+                            Skills
+                          </li>
+                          <li>
+                            {member[9]}
+                          </li>
+                          <li className={styles.email}>
+                            {member[3]}
+                          </li>
+                        </ul>
+                      </AccordionDetails>
+                    </Accordion> 
+  )
 }

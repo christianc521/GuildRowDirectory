@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    value: "asdsdfsdf",
+    value: "initialkey12345",
 }
 
 export const searchSlice = createSlice({

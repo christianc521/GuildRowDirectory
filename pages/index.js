@@ -31,7 +31,7 @@ export async function getStaticProps() {
   });
 
   const numRows = response.data.values ? response.data.values.length : 0;
-  console.log(`${numRows} rows retrieved.`);
+  // console.log(`${numRows} rows retrieved.`);
 
   const memberList = []; //storing all members in a single array
 
@@ -58,8 +58,8 @@ export async function getStaticProps() {
 export default function Home({memberList}) {
     const [clientMemberList, setClientMemberList] = useState([]);
 
-    console.log('Server-rendered data:', memberList);
-    console.log('Client-rendered data:', clientMemberList);
+    // console.log('Server-rendered data:', memberList);
+    // console.log('Client-rendered data:', clientMemberList);
 
     return (
       <>

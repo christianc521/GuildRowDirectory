@@ -6,7 +6,7 @@
 }
 
 .filterHeading {
-    padding-top: 10%;
+    padding-top: 0%;
     font-size: 18px;
     color: white;
 }
@@ -28,4 +28,23 @@
 .dropdownBox {
     background-color: #f9f9f9;
     border-color: white !important;
-  }
+}
+
+.dropdownContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10%;
+}
+
+.dropdownWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 8%;
+}
+
+.clearFiltersButton {
+    margin-top: 10px;
+}
