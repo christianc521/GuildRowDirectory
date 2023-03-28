@@ -161,7 +161,7 @@ export default function MultipleSelectPlaceholder() {
             </FormControl>
           </div>
       <div className={styles.dropdownWrapper}>
-        <h1 className={styles.filterHeading}>i'm interested in... </h1>
+        <h1 className={styles.filterHeading}>i&apos;m interested in... </h1>
           <FormControl sx={{ m: 0, width: 300, mt: 0 }}>
             <Select
               displayEmpty
