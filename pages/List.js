@@ -50,7 +50,8 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function List({ memberList }) {
     const input = useSelector((state) => state.searchInput.value)
-    const filter = useSelector((state) => state.filterInput.value)
+    const filter1 = useSelector((state) => state.filterInput.value.personName1)
+    const filter2 = useSelector((state) => state.filterInput.value.personName2)
 
 
     const filteredMembers = memberList.filter((member) => {
@@ -58,8 +59,8 @@ export default function List({ memberList }) {
         input === 'initialkey12345' ||
         member[1].toLowerCase().includes(input.toLowerCase());
       const filterMatch =  (member[1].toLowerCase().includes(input.toLowerCase()) &&
-                            member[9].toLowerCase().includes(filter.personName1.toLowerCase()) &&
-                            member[7].toLowerCase().includes(filter.personName2.toLowerCase()));
+                            member[9].toLowerCase().includes(filter1.toLowerCase()) &&
+                            member[7].toLowerCase().includes(filter2.toLowerCase()));
 
       return nameMatch && filterMatch;
       
@@ -71,8 +72,8 @@ export default function List({ memberList }) {
             {memberList && memberList.map(function (member, index) {
               const nameMatch = member[1].toLowerCase().includes(input.toLowerCase());
               const filterMatch = ((member[1].toLowerCase().includes(input.toLowerCase())) &&
-                                  member[9].toLowerCase().includes(filter.personName1.toLowerCase()) &&
-                                  member[7].toLowerCase().includes(filter.personName2.toLowerCase()));
+                                  member[9].toLowerCase().includes(filter1.toLowerCase()) &&
+                                  member[7].toLowerCase().includes(filter2.toLowerCase()));
   
               if (input === "initialkey12345") {
                 if (filterMatch) {
