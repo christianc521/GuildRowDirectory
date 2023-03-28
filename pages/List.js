@@ -51,21 +51,17 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export default function List({ memberList }) {
     const input = useSelector((state) => state.searchInput.value)
     const filter = useSelector((state) => state.filterInput.value)
-    
-    
+    // const filteredMembers = memberList.filter((member) => {
+    //   const nameMatch =
+    //     input === 'initialkey12345' ||
+    //     member[1].toLowerCase().includes(input.toLowerCase());
+    //   const filterMatch =  (member[1].toLowerCase().includes(input.toLowerCase()) &&
+    //                         member[9].toLowerCase().includes(filter.personName1.toLowerCase()) &&
+    //                         member[7].toLowerCase().includes(filter.personName2.toLowerCase()));
 
-
-    const filteredMembers = memberList.filter((member) => {
-      const nameMatch =
-        input === 'initialkey12345' ||
-        member[1].toLowerCase().includes(input.toLowerCase());
-      const filterMatch =  (member[1].toLowerCase().includes(input.toLowerCase()) &&
-                            member[9].toLowerCase().includes(filter.personName1.toLowerCase()) &&
-                            member[7].toLowerCase().includes(filter.personName2.toLowerCase()));
-
-      return nameMatch && filterMatch;
+    //   return nameMatch && filterMatch;
       
-    });
+    // });
 
     return (
         <div className={styles.list}>
@@ -86,9 +82,6 @@ export default function List({ memberList }) {
               }
             })}
           </ul>
-          {memberList.length > 0 && filteredMembers.length === 0 && (
-            <p className={styles.emptySearch}>No members found, start a new search!</p>
-          )}
         </div>
     )
 }
