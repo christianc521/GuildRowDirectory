@@ -1,6 +1,10 @@
 /* Reset margins, padding, and borders */
 html,
+main {
+  height: 100%;
+}
 body {
+  height: 10%;
   margin: 0;
   padding: 0;
   border: 0;
@@ -10,6 +14,6 @@ body {
 html,
 body,
 #__next {
-  height: 100%;
+  height: 100vh;
   width: 100%;
 }

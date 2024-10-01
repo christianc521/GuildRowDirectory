@@ -55,6 +55,21 @@ export async function getStaticProps() {
   };
 }
 
+const FullHeightPage = () => (
+  <div>
+    Hello World!
+    <style global jsx>{`
+      html,
+      body,
+      body > div:first-child,
+      div#__next,
+      div#__next > div {
+        height: 100%;
+      }
+    `}</style>
+  </div>
+)
+
 export default function Home({memberList}) {
     const [clientMemberList, setClientMemberList] = useState([]);
 
@@ -63,26 +78,28 @@ export default function Home({memberList}) {
 
     return (
       <>
-      <main className={inter.className}>
-        <Provider store={store}>
-              <div className={styles.body}>
-                  <header className={styles.top}>
-                      <img className={styles.topElements} src="static/Gold_LogoBug.png" width="100" height="100"/>
-                      <Search />
-                  </header>
-                  <div className={styles.main}>
-                      <div className={styles.mainLeft}>
-                        <MultipleSelectPlaceholder />
-                      </div>
-                      <hr className={styles.divider}></hr>
-                      <div className={styles.mainRight}>
-                      <h1 className={styles.resultsHeader}>Results</h1>
-                      <List {...{memberList}} />
-                      </div>
-                  </div>
-              </div>
-          </Provider>
-      </main>
+      <div className={styles.body}>
+          <Provider store={store}>
+                    <header className={styles.header}>
+                        <img className={styles.topElements} src="static/Gold_LogoBug.png" width="100" height="100"/>
+                        <Search />
+                    </header>
+                    <div className={styles.main}>
+                        <div className={styles.mainLeft}>
+                          <MultipleSelectPlaceholder />
+                        </div>
+                        <hr className={styles.divider}></hr>
+                        <div className={styles.mainRight}>
+                        <h1 className={styles.resultsHeader}>Results</h1>
+                        <List {...{memberList}} />
+                        </div>
+                    </div>
+                    <footer className={styles.footer}>
+                      <h1> footer information here </h1>
+                    </footer>
+            </Provider>
+      </div>
+      
       </>
       // <div>
       // <h1>Member List</h1>

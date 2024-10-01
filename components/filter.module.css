@@ -41,7 +41,7 @@
 .dropdownWrapper {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 8%;
 }
 
