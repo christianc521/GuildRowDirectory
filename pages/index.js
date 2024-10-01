@@ -103,7 +103,7 @@ export default function Home({memberList}) {
       </>
       // <div>
       // <h1>Member List</h1>
-      // <ul>
+      // <ul> test
       //   {memberList.map((member, index) => (
       //     <li key={index}>{member[1]}</li>
       //   ))}
